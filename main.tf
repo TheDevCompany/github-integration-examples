@@ -107,25 +107,6 @@ resource "google_compute_instance" "default" {
 
 }
 
-resource "google_compute_instance" "default2" {
-  project      = "tcb-project-487305"
-  zone         = "asia-south2-a"
-  name         = "jump-host"
-  machine_type = "e2-medium"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-    }
-  }
-  network_interface {
-    network    = "vpc1"
-    subnetwork = "subnet1"
-    network_ip         = google_compute_address.my_internal_ip_addr.address
-  }
-}
-
-
 ## Creare Firewall to access jump hist via iap
 
 
