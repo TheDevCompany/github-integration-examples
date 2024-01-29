@@ -88,7 +88,7 @@ resource "google_compute_address" "my_internal_ip_addr2" {
   description  = "An internal IP address for my jump host"
 }
 
-resource "google_compute_instance" "only" {
+resource "google_compute_instance" "gcp_instance" {
   project      = "tcb-project-371707"
   zone         = "asia-south2-a"
   name         = "jump-host"
