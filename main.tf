@@ -78,35 +78,6 @@ resource "google_container_node_pool" "primary_nodes" {
 
 ## Create jump host . We will allow this jump host to access GKE cluster. the ip of this jump host is already authorized to allowin the GKE cluster
 
-resource "google_compute_address" "my_internal_ip_addr" {
-  project      = "tcb-project-371706"
-  address_type = "INTERNAL"
-  region       = "asia-south2"
-  subnetwork   = "subnet1"
-  name         = "my-ip"
-  address      = "10.0.0.7"
-  description  = "An internal IP address for my jump host"
-}
-
-resource "google_compute_instance" "default" {
-  project      = "tcb-project-371706"
-  zone         = "asia-south2-a"
-  name         = "jump-host"
-  machine_type = "e2-medium"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-    }
-  }
-  network_interface {
-    network    = "vpc1"
-    subnetwork = "subnet1" # Replace with a reference or self link to your subnet, in quotes
-    network_ip         = google_compute_address.my_internal_ip_addr.address
-  }
-
-}
-
 resource "google_compute_address" "my_internal_ip_addr2" {
   project      = "tcb-project-371707"
   address_type = "INTERNAL"
@@ -117,7 +88,7 @@ resource "google_compute_address" "my_internal_ip_addr2" {
   description  = "An internal IP address for my jump host"
 }
 
-resource "google_compute_instance" "second" {
+resource "google_compute_instance" "only" {
   project      = "tcb-project-371707"
   zone         = "asia-south2-a"
   name         = "jump-host"
